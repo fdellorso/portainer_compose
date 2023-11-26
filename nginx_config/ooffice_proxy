@@ -1,0 +1,39 @@
+server {
+  listen 443 ssl http2; # managed by Certbot
+
+  server_name ooffice.ddns.net;
+  # server_tokens off;
+
+  root /var/www/html;
+
+  access_log /var/log/nginx/access.log;
+  error_log /var/log/nginx/error.log;
+
+  ssl_certificate /etc/letsencrypt/live/ooffice.ddns.net/fullchain.pem; # managed by Certbot
+  ssl_certificate_key /etc/letsencrypt/live/ooffice.ddns.net/privkey.pem; # managed by Certbot
+
+  include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+  ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+  add_header   Strict-Transport-Security   "max-age=31536000; includeSubDomains" always;
+  #add_header   X-Frame-Options             SAMEORIGIN;
+  #add_header   X-Content-Type-Options      nosniff;
+
+  include includes/homepage;
+  include includes/portainer;
+  include includes/webmin;
+  include includes/nextcloud;
+  include includes/onlyoffice;
+}
+
+server {
+  if ($host = ooffice.ddns.net) {
+    return 301 https://$host$request_uri;
+  } # managed by Certbot
+
+  listen 80;
+
+  server_name ooffice.ddns.net;
+
+  return 404; # managed by Certbot
+}

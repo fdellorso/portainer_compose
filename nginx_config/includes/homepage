@@ -1,0 +1,29 @@
+location ~ ^/_next/(.+\.(css|js|woff2)) {
+  proxy_pass http://ooffice.local:3000;
+}
+
+location ~ ^/api/(config|widgets|ping|docker|services|hash|bookmarks|(re)?validate|releases)/* {
+  proxy_pass http://ooffice.local:3000;
+}
+
+location ~ ^/icons/(.+\.(png|svg)) {
+  proxy_pass http://ooffice.local:3000;
+}
+
+location ~ ^/site.webmanifest {
+  proxy_pass http://ooffice.local:3000;
+}
+
+location ~ ^/(android-chrome*|apple-touch*|favicon*|homepage.ico) {
+  proxy_pass http://ooffice.local:3000;
+}
+
+location /homepage/ {
+  proxy_pass http://ooffice.local:3000/;
+
+  #Proxy Settings
+  # proxy_set_header   Host             $http_host;
+  # proxy_set_header   X-Real-IP        $remote_addr;
+  # proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+  # proxy_set_header   X-Forwarded-Proto $the_scheme;
+}

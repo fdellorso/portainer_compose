@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  webmin:
+    image: johanp/webmin
+    container_name: Webmin
+    ports:
+      - 10000:10000
+    # volumes: /home/webmin:/etc/webmin
+    restart: unless-stopped
