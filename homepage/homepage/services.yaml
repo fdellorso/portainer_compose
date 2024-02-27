@@ -1,0 +1,103 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/services
+
+- Self Hosted Remote Group:
+    - Webmin Service:
+        icon: webmin
+        href: https://ooffice.ddns.net/webmin
+        description: Web-based system administration
+
+    - Portainer Service:
+        icon: portainer
+        href: https://ooffice.ddns.net/portainer
+        description: Accelerate container adoption
+        widget:
+            type: portainer
+            url: https://ooffice.ddns.net/portainer
+            env: 2
+            key: ptr_vDrh53bQ8hIIKufLTZnmT1bSSbTas9ZEsM026ZkinzQ=
+
+    - Nextcloud Service:
+        icon: nextcloud
+        href: https://ooffice.ddns.net/nextcloud
+        description: Regain control over your data
+        widget:
+            type: nextcloud
+            url: https://ooffice.ddns.net/nextcloud
+            username: admin
+            password: Fr1sedd@!982
+
+    - Only Office Service:
+        icon: onlyoffice
+        href: https://ooffice.ddns.net
+        description: Run your private office with the ONLYOFFICE
+
+- Self Hosted Local Group:
+    - Nginx Proxy Manager Service:
+        icon: nginx
+        href: http://ooffice.local:81
+        description: Expose your services easily and securely
+        widget:
+            type: npm
+            url: http://nginxmanager-app-1:81
+            username: francesco.dellorso@gmail.com
+            password: Fr1sedd@!982
+
+    - Elkar Backup Service:
+        icon: https://victorpastor.com/wp-content/uploads/2017/08/elkarbackup.png
+        href: http://ooffice.local:4000
+        description: Keep your data safe from harm
+
+    - Steam Headless Service:
+        icon: https://avatars.githubusercontent.com/u/115333610?s=200&v=4
+        href: http://ooffice.local:8083
+        description: Remote Game Streaming Server
+
+- 3D Print Local Group :
+    - Alarm Cockpit Service:
+        icon: cockpit
+        href: http://alarm.local:9090
+        description: highly customizable application dashboard with integrations
+    
+    - EspHome Service:
+        icon: esphome
+        href: http://alarm.local:6052
+        description: highly customizable application dashboard with integrations
+
+    - Home Assistant Service:
+        icon: home-assistant
+        href: http://alarm.local:8123
+        description: highly customizable application dashboard with integrations
+        widget:
+            type: homeassistant
+            url: http://alarm.local:8123
+            key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI4YjU1MzkyMzg5NTI0MjRiOGYyNzI4NDE0NWMyODI5YiIsImlhdCI6MTcwNTgzMDYzMiwiZXhwIjoyMDIxMTkwNjMyfQ.66frZ3roLYfKicRyF99reGTS59ALEn8CGHsuS5yPfqk
+            custom:
+                # - state: sensor.total_power
+                # - state: sensor.total_energy_today
+                #   label: energy today
+                # - template: "{{ states.switch|selectattr('state','equalto','on')|list|length }}"
+                #   label: switches on
+                - state: weather.forecast_casa
+                  label: wind speed
+                  value: "{attributes.wind_speed} {attributes.wind_speed_unit}"
+
+
+    - Klipper Service:
+        icon: https://www.klipper3d.org/img/klipper-logo.png
+        href: http://alarm.local:7070
+        description: Klipper is a 3d-Printer firmware
+        # widget:
+        #     type: moonraker
+        #     url: http://alarm.local:7070
+
+    - Octoprint Service:
+        icon: octoprint
+        href: http://alarm.local:8080
+        description: The snappy web interface for your 3D printer
+        # widget:
+        #     type: octoprint
+        #     url: http://alarm.local:8080
+        #     key: 3B9F67070C694A2D978B170F3179963F
+            

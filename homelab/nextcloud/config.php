@@ -2,8 +2,6 @@
 $CONFIG = array (
   'htaccess.RewriteBase' => '/',
   'memcache.local' => '\\OC\\Memcache\\APCu',
-  'filelocking.enabled' => true,
-  'memcache.locking' => '\\OC\\Memcache\\APCu',
   'apps_paths' => 
   array (
     0 => 
@@ -19,45 +17,30 @@ $CONFIG = array (
       'writable' => true,
     ),
   ),
-  'instanceid' => 'ocz71v1kq7cm',
-  'passwordsalt' => 'FUGUKnRBNXtmWUyeRwXfzz9XmSB51K',
-  'secret' => 'cp+y58qksaPXrXXf0htOBFum0VzWWnFUwX08xsFTaANGIXyb',
+  'instanceid' => 'ocmbtppbve7e',
+  'passwordsalt' => 'UoEJde5wLBQQssMXCvc0SHuklHRLwc',
+  'secret' => '6v8ZaeA/DZmENqTPztRMdALFF3x8EB8k+L4k6UWZAlJ9EzEP',
   'trusted_domains' => 
   array (
     0 => 'ooffice.local',
     1 => 'ooffice.ddns.net',
   ),
-  'datadirectory' => '/var/www/html/data',
-  'dbtype' => 'mysql',
-  'version' => '28.0.2.5',
   'overwrite.cli.url' => 'http://ooffice.local/nextcloud',
   'overwritewebroot' => '/nextcloud',
   'overwriteprotocol' => 'https',
-  'forwarded_for_headers' => 
+  'forwarded_for_headers' =>
   array (
     0 => 'HTTP_X_FORWARDED_FOR',
   ),
+  'allow_local_remote_servers' => true,
+  'datadirectory' => '/var/www/html/data',
+  'dbtype' => 'mysql',
+  'version' => '25.0.1.1',
   'dbname' => 'nextcloud',
   'dbhost' => 'db',
   'dbport' => '',
   'dbtableprefix' => 'oc_',
-  'mysql.utf8mb4' => true,
   'dbuser' => 'nextcloud',
   'dbpassword' => 'nextcloud',
   'installed' => true,
-  'default_phone_region' => 'CH',
-  'onlyoffice' => 
-  array (
-    'jwt_secret' => 'yourSecret',
-    'jwt_header' => 'AuthorizationJwt',
-  ),
-  'app_install_overwrite' => 
-  array (
-    0 => 'occweb',
-1 => 'news',
-    2 => 'files_rightclick',
-  ),
-  'loglevel' => 2,
-  'maintenance' => false,
-'maintenance_window_start' => 1,
 );

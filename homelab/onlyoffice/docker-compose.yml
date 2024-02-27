@@ -1,5 +1,4 @@
 version: '3'
-
 services:
   onlyoffice-mysql-server:
     container_name: onlyoffice-mysql-server
@@ -13,15 +12,14 @@ services:
     restart: always
     volumes:
       # - ./config/mysql/conf.d:/etc/mysql/conf.d
+      - /home/onlyoffice/mysql/conf.d:/etc/mysql/conf.d
       # - ./config/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-      - /home/onlyoffice/config/mysql/conf.d:/etc/mysql/conf.d
-      - /home/onlyoffice/config/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - /home/onlyoffice/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
       - mysql_data:/var/lib/mysql
 
   onlyoffice-community-server:
     container_name: onlyoffice-community-server
-    image: onlyoffice/communityserver:12.5.2.1848
-    #12.0.1.1748
+    image: onlyoffice/communityserver:12.0.1.1748
     depends_on:
       - onlyoffice-mysql-server
       - onlyoffice-document-server
@@ -61,12 +59,13 @@ services:
     tty: true
     restart: always
     privileged: true
-    cgroup: host
     volumes:
-      - community_data:/var/www/onlyoffice/Data
+      # - community_data:/var/www/onlyoffice/Data
+      - /home/onlyoffice/data:/var/www/onlyoffice/Data
       - community_log:/var/log/onlyoffice
       - community_letsencrypt:/etc/letsencrypt
-      - document_data:/var/www/onlyoffice/DocumentServerData
+      # - document_data:/var/www/onlyoffice/DocumentServerData
+      - /home/document/data:/var/www/onlyoffice/DocumentServerData
       - /sys/fs/cgroup:/sys/fs/cgroup:rw
       # - ./certs:/var/www/onlyoffice/Data/certs
       - /home/onlyoffice/certs:/var/www/onlyoffice/Data/certs
@@ -80,10 +79,10 @@ services:
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms1g -Xmx1g -Dlog4j2.formatMsgNoLookups=true"
       - "indices.fielddata.cache.size=30%"
-      - "indices.memory.index_buffer_size=30%"
+      - "indices.memory.index_buffer_size=30%" 
       - "ingest.geoip.downloader.enabled=false"
     networks:
-      - onlyoffice
+      - onlyoffice    
     ulimits:
       memlock:
         soft: -1
@@ -99,8 +98,7 @@ services:
 
   onlyoffice-document-server:
     container_name: onlyoffice-document-server
-    image: onlyoffice/documentserver:8.0.0.1
-    #7.1.1.23
+    image: onlyoffice/documentserver:7.1.1.23
     stdin_open: true
     tty: true
     restart: always
@@ -119,10 +117,11 @@ services:
       - '80'
       - '443'
     volumes:
-      - document_data:/var/www/onlyoffice/Data
+      # - document_data:/var/www/onlyoffice/Data
+      - /home/document/data:/var/www/onlyoffice/Data
       - document_log:/var/log/onlyoffice
       # - ./document_fonts:/usr/share/fonts/truetype/custom
-      - /home/onlyoffice/document_fonts:/usr/share/fonts/truetype/custom
+      - /home/document/fonts:/usr/share/fonts/truetype/custom
       - document_forgotten:/var/lib/onlyoffice/documentserver/App_Data/cache/files/forgotten
 
   # onlyoffice-mail-server:
@@ -158,8 +157,7 @@ services:
       - onlyoffice-document-server
       # - onlyoffice-mail-server
       - onlyoffice-community-server
-    image: onlyoffice/controlpanel:3.5.0.516
-    #3.1.1.467
+    image: onlyoffice/controlpanel:3.1.1.467
     environment:
       - ONLYOFFICE_CORE_MACHINEKEY=core_secret
     expose:
@@ -184,11 +182,11 @@ volumes:
   # mail_certs:
   # mail_log:
   # mail_mysql:
-  document_data:
+  # document_data:
   document_log:
   document_forgotten:
-  community_mysql:
-  community_data:
+  # community_mysql:
+  # community_data:
   community_log:
   community_letsencrypt:
   controlpanel_data:
